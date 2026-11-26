@@ -2,7 +2,7 @@
 
 export const profile = {
   name: 'Mohit Vaswani',
-  role: 'Indie Maker',
+  role: 'Indie Hacker',
   initials: 'MV',
 };
 

@@ -12,7 +12,7 @@ const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=$
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{profile.name}</title>
-    <meta name="description" content={`${profile.name} — indie maker building Mac apps and products people use every day.`} />
+    <meta name="description" content={`${profile.name} — indie hacker, content creator and occasional writer who loves turning ideas into real things on the internet.`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,20 +35,17 @@ const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=$
           </header>
 
           <p class="body">
-            I’m Mohit Vaswani. I build small, focused apps for the Mac and the web. I make{" "}
-            <a class="hl" href="https://tryhomy.app" target="_blank" rel="noopener">Homy{" "}<img class="chip" src={favicon('tryhomy.app')} alt="" /></a>,{" "}
-            <a class="hl" href="https://trymacapps.com" target="_blank" rel="noopener">Trymacapps{" "}<img class="chip" src={favicon('trymacapps.com')} alt="" /></a>{" "}and{" "}
-            <a class="hl" href="https://notchbuddy.com" target="_blank" rel="noopener">Notch Buddy{" "}<img class="chip" src={favicon('notchbuddy.com')} alt="" /></a>{" "}— products that do one
-            thing well, without the <span class="pill">noise</span>. I also built and sold{" "}
-            <a class="hl" href="https://diskbuddy.com" target="_blank" rel="noopener">Disk Buddy{" "}<img class="chip" src={favicon('diskbuddy.com')} alt="" /></a>.
+            I’m Mohit — an <span class="hl">indie hacker</span> and <span class="hl">content creator</span>.
+            I love turning ideas into products and shipping them on the internet.
           </p>
 
           <h2 class="label section">Info</h2>
           <p class="body">
-            I design, build, and ship on my own — from the first sketch to launch and growth. I write
-            about building products on{" "}
-            <a class="hl" href="https://medium.com/@hii_mohit" target="_blank" rel="noopener">Medium</a>{" "}and
-            share what I’m working on, in public, on{" "}
+            I wrote my first line of code at 19. Then I spent two years across three startups, learning
+            how products actually get built, shipped and sold. After that I quit my job to bet on myself
+            and build my own products. These days I make things, write about the journey on{" "}
+            <a class="hl" href="https://medium.com/@hii_mohit" target="_blank" rel="noopener">Medium</a>,
+            and share what I’m working on, in public, on{" "}
             <a class="hl" href="https://x.com/hii_mohit" target="_blank" rel="noopener">X</a>.
           </p>
 
@@ -195,8 +192,15 @@ const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=$
     width: 26px; height: 26px; border-radius: 7px; color: #fff;
     display: inline-grid; place-items: center; flex: none;
   }
-  .social-name { color: var(--ink); }
-  .socials a:hover .social-name { text-decoration: underline; text-underline-offset: 3px; }
+  .social-name {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--muted);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.15s;
+  }
+  .socials a:hover .social-name { text-decoration-color: currentColor; }
   .dash { color: var(--line); }
 
   .more { margin-top: 18px; text-transform: none; }
