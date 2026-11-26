@@ -1,0 +1,236 @@
+---
+import Icon from '../components/Icon.astro';
+import { profile, products, socials } from '../data';
+
+const year = new Date().getFullYear();
+const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{profile.name}</title>
+    <meta name="description" content={`${profile.name} — indie maker building Mac apps and products people use every day.`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page">
+      <hr class="rule" />
+
+      <main class="grid">
+        <section class="left">
+          <header class="who">
+            <img class="avatar" src="/avatar.jpg" alt={profile.name} width="110" height="130" />
+            <div>
+              <div class="name">{profile.name}</div>
+              <div class="label">{profile.role}</div>
+            </div>
+          </header>
+
+          <p class="body">
+            I’m Mohit Vaswani. I build small, focused apps for the Mac and the web. I make{" "}
+            <a class="hl" href="https://tryhomy.app" target="_blank" rel="noopener">Homy{" "}<img class="chip" src={favicon('tryhomy.app')} alt="" /></a>,{" "}
+            <a class="hl" href="https://trymacapps.com" target="_blank" rel="noopener">Trymacapps{" "}<img class="chip" src={favicon('trymacapps.com')} alt="" /></a>{" "}and{" "}
+            <a class="hl" href="https://notchbuddy.com" target="_blank" rel="noopener">Notch Buddy{" "}<img class="chip" src={favicon('notchbuddy.com')} alt="" /></a>{" "}— products that do one
+            thing well, without the <span class="pill">noise</span>. I also built and sold{" "}
+            <a class="hl" href="https://diskbuddy.com" target="_blank" rel="noopener">Disk Buddy{" "}<img class="chip" src={favicon('diskbuddy.com')} alt="" /></a>.
+          </p>
+
+          <h2 class="label section">Info</h2>
+          <p class="body">
+            I design, build, and ship on my own — from the first sketch to launch and growth. I write
+            about building products on{" "}
+            <a class="hl" href="https://medium.com/@hii_mohit" target="_blank" rel="noopener">Medium</a>{" "}and
+            share what I’m working on, in public, on{" "}
+            <a class="hl" href="https://x.com/hii_mohit" target="_blank" rel="noopener">X</a>.
+          </p>
+
+          <h2 class="label section">Socials</h2>
+          <ul class="socials">
+            {
+              socials.map((s) => (
+                <li>
+                  <a href={s.url} target="_blank" rel="noopener">
+                    <span class="social-icon" style={`background:${s.bg}`}>
+                      <Icon name={s.icon} size={13} />
+                    </span>
+                    <span class="social-name">{s.name}</span>
+                    <span class="dash">—</span>
+                    <span class="count">{s.followers} followers</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <aside class="right" id="products">
+          <h2 class="label">Products</h2>
+          <ul class="products">
+            {
+              products.map((p) => (
+                <li>
+                  <a href={p.url} target="_blank" rel="noopener" class="product">
+                    <span class="tile">
+                      <img src={favicon(p.domain)} alt="" width="46" height="46" loading="lazy" />
+                    </span>
+                    <span class="meta">
+                      <span class="title">{p.name}</span>
+                      <span class="label sub">
+                        {p.domain} <span class="dot">•</span>{' '}
+                        {p.status === 'Acquired' ? (
+                          <span class="sold">🤝 Acquired</span>
+                        ) : (
+                          <span class="live">
+                            <i /> Live
+                          </span>
+                        )}
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="more label">+ 2 more products got acquired</p>
+        </aside>
+      </main>
+
+      <hr class="rule" />
+
+      <footer class="foot label">
+        <span>© {profile.name} {year}</span>
+        <a href="#products" class="all">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M8 12h8M13 8l4 4-4 4" /></svg>
+          All products
+        </a>
+        <span></span>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #f6f6f2;
+    --ink: #1d1d1b;
+    --muted: #6f6f6a;
+    --line: #d9d9d3;
+    --accent: #2533d6;
+    --lime: #d7f542;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141413;
+      --ink: #edede8;
+      --muted: #8f8f88;
+      --line: #2e2e2b;
+      --accent: #8c96ff;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.75 Inter, system-ui, sans-serif;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .icon { display: block; fill: currentColor; }
+</style>
+
+<style>
+  .page { max-width: 1440px; margin: 0 auto; padding: 32px 64px; }
+  .rule { border: 0; border-top: 1px dashed var(--line); margin: 0; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 530px) minmax(0, 300px);
+    justify-content: space-between;
+    padding: 48px 0 84px;
+    gap: 48px;
+  }
+
+  .label {
+    font: 400 13px/1.4 'IBM Plex Mono', ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .who { display: flex; align-items: flex-end; gap: 18px; margin-bottom: 30px; }
+  .avatar {
+    width: 110px; height: 130px; border-radius: 12px;
+    background: var(--lime);
+    object-fit: cover; display: block; flex: none;
+  }
+  .name { font-size: 16px; line-height: 1.3; }
+
+  .body { font-size: 16px; line-height: 1.85; color: var(--muted); margin: 0; }
+  .hl { color: var(--ink); white-space: nowrap; }
+  .hl:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .chip { width: 14px; height: 14px; border-radius: 3px; vertical-align: -2px; }
+  .pill {
+    color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 999px; padding: 0 5px;
+  }
+
+  .section { margin: 28px 0 10px; }
+
+  .socials { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .socials a { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; color: var(--muted); }
+  .social-icon {
+    width: 26px; height: 26px; border-radius: 7px; color: #fff;
+    display: inline-grid; place-items: center; flex: none;
+  }
+  .social-name { color: var(--ink); }
+  .socials a:hover .social-name { text-decoration: underline; text-underline-offset: 3px; }
+  .dash { color: var(--line); }
+
+  .more { margin-top: 18px; text-transform: none; }
+  .products { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 18px; }
+  .product { display: flex; gap: 12px; align-items: flex-start; }
+  .tile {
+    flex: none; width: 46px; height: 46px; border-radius: 10px;
+    display: grid; place-items: center;
+    transition: transform 0.2s ease;
+  }
+  .tile img { width: 100%; height: 100%; border-radius: 10px; }
+  .product:hover .tile { transform: rotate(-6deg) scale(1.05); }
+  .meta { display: grid; gap: 2px; padding-top: 2px; }
+  .title { font-size: 16px; line-height: 1.35; }
+  .product:hover .title { text-decoration: underline; text-underline-offset: 3px; }
+  .sub { text-transform: none; font-size: 12px; }
+  .dot { margin: 0 4px; }
+  .live i {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: #22c55e; margin-right: 3px; vertical-align: 1px;
+  }
+  .sold { text-transform: uppercase; }
+
+
+  .foot {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 34px 0 20px;
+  }
+  .all { display: inline-flex; align-items: center; gap: 10px; }
+  .all:hover { color: var(--ink); }
+
+  @media (max-width: 720px) {
+    .page { padding: 16px; }
+    .grid { grid-template-columns: 1fr; gap: 40px; }
+    .foot { grid-template-columns: 1fr; gap: 14px; }
+  }
+</style>

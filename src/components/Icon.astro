@@ -1,0 +1,19 @@
+---
+// Renders a colorful brand icon from the Iconify "simple-icons" set (CC0) inline at build time.
+import { icons } from '@iconify-json/simple-icons';
+import { getIconData, iconToSVG, iconToHTML, replaceIDs } from '@iconify/utils';
+
+interface Props {
+  name: string;
+  size?: number;
+}
+
+const { name, size = 18 } = Astro.props;
+const data = getIconData(icons, name);
+if (!data) throw new Error(`Icon "simple-icons:${name}" not found`);
+
+const { attributes, body } = iconToSVG(data, { height: size });
+const html = iconToHTML(replaceIDs(body), { ...attributes, 'aria-hidden': 'true', class: 'icon' });
+---
+
+<Fragment set:html={html} />
